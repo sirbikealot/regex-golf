@@ -1,11 +1,22 @@
 # test_regex_golf.rb
 
-require 'minitest/spec'
+require './regex_golf'
+require 'minitest/spec' # for BDD blocks like ['describe','it', 'let','before', 'after'] and methods ['must','wont']
 require 'minitest/autorun'
-require 'regex_golf'
+require 'minitest/reporters' # for GREEN-RED display
+Minitest::Reporters.use!
 
-class TestRegexGolf < Minitest::Unit::TestCase # MiniTest v4
-	# should inherit from Minitest::Test for MiniTest 5
+
+class TestRegexGolf < Minitest::Test
+
+	def test_assert_equal_from_test_file
+		x = 2
+		assert_equal 2, x
+	end 
+
+end
+
+=begin
 
 	def setup
 	end
@@ -56,4 +67,5 @@ class TestRegexGolf < Minitest::Unit::TestCase # MiniTest v4
 	def final_regex_has_no_forward_slashes
 	end
 
-end
+
+=end
