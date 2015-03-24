@@ -1,7 +1,12 @@
-# useful-ruby-utilities
+## useful-ruby-utilities
 
-Some file utilities written in Ruby
+###Some file utilities written in Ruby
 
-I attended a Meetup of Ruby coders and learned that I should start putting all my code on GitHub and start my portfolio NOW!  
+ - ruby-ls (A ruby clone of POSIX ls command. Course assignment from [**elm-city-craftworks/**course-001](https://github.com/sirbikealot/course-001/blob/master/PART_1.md)
+ - password_generator (Customizable password creator)
 
-My solutions to codewars are in the peer directory codewars_solutions.
+**24 March 2015**
+ - Added user interface for password_generator.rb.  User can select password length and omit special characters.
+ - Added executable version password_gen => Put it in your path and use it from the CLI anytime.
+ 
+My solutions to codewars challenges are in the peer directory codewars_solutions.
