@@ -12,7 +12,6 @@
 #all_words = to_match + to_reject
 
 GETWORDS = <<-TEXT 
-Enter your list of words to match.
 Press ENTER after each word.
 Press ENTER twice in a row when you are finished.
 TEXT
@@ -24,18 +23,19 @@ Check this list. Are they any misspelled words?
 Are there any misspelled words? [Y/n] 
 TEXT
 
-print GETWORDS, "\n"
-print CHECKLIST, "\n"
-
-=begin
-
 class WordGetter
 
+  attr_accessor :to_match, :to_reject
+  
+  # def initialize
+  # end
+
   def get_match_words
-    print GETWORDS,'\n'
-    to_match = gets("\n\n").chomp
-    print_word_list(to_match, "match")
-    check_list_complete(to_match)
+    puts "Enter your list of words to match."
+    print GETWORDS
+    @to_match = gets("\n\n").chomp
+    print_word_list(@to_match, "match")
+    check_list_complete(@to_match)
   end
 
   def check_list_for_errors(words = to_match)
@@ -54,14 +54,14 @@ class WordGetter
 
 
   def get_reject_words
-    print GETWORDS,'\n'
-    to_reject = gets("\n\n").chomp
-    print_word_list(to_reject, "reject")
-    check_list_complete(to_reject)
-
+    puts "Enter your list of words to reject."
+    print GETWORDS
+    @to_reject = gets("\n\n").chomp
+    print_word_list(@to_reject, "reject")
+    check_list_complete(@to_reject)
   end
 
-  def print_word_list(words = to_match, match_reject = "match")
+  def print_word_list(words = @to_match, match_reject = "match")
     puts "This is your list of words to #{match_reject}. Please check it:"
     words.split.sort.each {|w| puts w}
   end
@@ -71,8 +71,8 @@ class WordGetter
     complete = gets.chomp.downcase
     while complete != "y"
       puts "Add the missing words here:"
-      to_match += gets("\n\n").chomp
-      print_word_list(to_match, "match")
+      @to_match += gets("\n\n").chomp
+      print_word_list(@to_match, "match")
       puts "Is the list complete? (Y for Yes, N for No)"
       complete = gets.chomp.downcase
     end
@@ -80,16 +80,18 @@ class WordGetter
 
 end
 
-=end
+w = WordGetter.new
+w.get_match_words
+w.get_reject_words
 
 class StringMatcher
 
-  # attr_accessor :all_words, :regex
+  attr_accessor :all_words
 
   def initialize(to_match, to_reject, regex_string = String.new)
-    @to_match = to_match
-    @to_reject = to_reject
-    @all_words = to_match + to_reject
+    @to_match = to_match.split
+    @to_reject = to_reject.split
+    @all_words = @to_match + @to_reject
     # @regex_string = regex_string
     @regex = Regexp.new(regex_string)
   end
@@ -101,6 +103,11 @@ class StringMatcher
   end
 
 end
+
+## Change actions below into a script that asks for regex
+
+s = StringMatcher.new(w.to_match, w.to_reject, "a.+")
+puts s.match_words?
 
 class RegexPrinter
 
