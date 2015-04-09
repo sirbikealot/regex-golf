@@ -1,7 +1,6 @@
 # regex_golf_classes.rb
 
-# classes required for regex_golf.rb to run
-
+## classes required for regex_golf.rb to run
 
 GETWORDS = <<-TEXT 
 Press ENTER after each word.
@@ -18,9 +17,6 @@ TEXT
 class WordGetter
 
   attr_accessor :to_match, :to_reject
-  
-  # def initialize
-  # end
 
   def get_match_words
     puts "Enter your list of words to match."
@@ -71,9 +67,6 @@ class WordGetter
   end
 
 end
-
-
-## Add script that asks for regex
 
 class StringMatcher
 

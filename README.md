@@ -10,6 +10,6 @@
  - Added executable version password_gen => Put it in your path and use it from the CLI anytime.
 
 **9 April 2015**
- - Added new directory regex-golf, a CLI tool that lets you try different regular expressions to match/reject word lists before your final solution into the Regex Golf site [regex.golf.nu]. 
+ - Added new directory regex-golf, a CLI tool that lets you try different regular expressions to match/reject word lists before your final solution into the [Regex Golf](https://regex.alf.nu) web site.
  
 My solutions to codewars challenges are in the peer directory codewars_solutions.

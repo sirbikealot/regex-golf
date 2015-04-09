@@ -21,14 +21,10 @@ class TestRegexGolf < Minitest::Test
     
     @all_words = @to_reject + @to_match
   
-    
-    #@to_match_with_typo =  (@ to_match[0..-2] << "veed").join(' ')
-
     @regex_string = "[a-df][a-e][a-f]{2}\w?"
     @bad_regex_string = "/\w+/"
     @r = RegexPrinter.new(@regex_string)
     @m =            StringMatcher.new(@to_match, @to_reject, @regex_string)
-    #@m_with_typo = StringMatcher.new(@to_match_with_typo, @regex_string)
   end
 
   def test_match_words_method_passes_when_correct
@@ -48,48 +44,3 @@ class TestRegexGolf < Minitest::Test
 
 
 end
-
-
-=begin
-
-  def test_words_to_match_populate_array
-    assert_equal to_match.class, Array
-    assert_equal to_match.count, to_match_input.split.count
-  end
-
-  def test_words_to_reject_populate_array
-    assert_equal to_reject.class, Array
-    assert_equal to_reject.count, to_reject_input.split.count
-  end
-
-  def test_prints_words_to_match_to_console
-  end
-
-  def test_prints_words_to_reject_to_console
-  end
-
-  def test_accept_regex_with_forward_slash_delimiters
-  end
-
-  def test_accept_regex_with_no_delimiters
-  end
-
-  def test_print_success_if_matches_all
-  end
-
-  def test_print_success_if_matches_no_to_reject_words
-  end
-
-  def test_print_fail_if_any_match_words_missing
-  end
-
-  def test_print_fail_if_matches_any_to_reject_words
-  end
-
-  def test_regex_matches_zero_reject_words
-  end
-
-  def test_regex_matches_all_accept_words
-  end
-
-=end
