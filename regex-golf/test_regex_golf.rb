@@ -1,6 +1,6 @@
 # test_regex_golf.rb
 
-require './regex_golf'
+require './regex_golf_classes.rb'
 require 'minitest/spec' # for BDD blocks like ['describe','it', 'let','before', 'after'] and methods ['must','wont']
 require 'minitest/autorun'
 require 'minitest/reporters' # for GREEN-RED display
@@ -10,16 +10,16 @@ Minitest::Reporters.use!
 class TestRegexGolf < Minitest::Test
 
   def setup
-    @to_match = ["abac", "accede", "adead", "babe", "bead",
-                "bebed", "bedad", "bedded", "bedead", "bedeaf",
-                "caba", "caffa", "dace", "dade", "daff", "dead", 
-                "deed", "deface", "faded", "faff", "feed"]
-    @to_reject = ["beam", "buoy", "canjac", "chymia", "corah", 
-                "cupula", "griece", "hafter", "idic", "lucy",
-                "martyr", "matron", "messrs", "mucose", "relose", 
-                "sonly", "tegua", "threap", "towned", "widish", "yite"]
+    @to_match = %q{
+      abac accede adead babe bead bebed bedad bedded bedead bedeaf
+      caba caffa dace dade daff dead deed deface faded faff feed
+    }
+    @to_reject = %q{
+      beam buoy canjac chymia corah cupula griece hafter idic lucy
+      martyr matron messrs mucose relose sonly tegua threap towned widish yite
+    }
     
-    @all_words =            @to_reject + @to_match
+    @all_words = @to_reject + @to_match
   
     
     #@to_match_with_typo =  (@ to_match[0..-2] << "veed").join(' ')
@@ -29,10 +29,6 @@ class TestRegexGolf < Minitest::Test
     @r = RegexPrinter.new(@regex_string)
     @m =            StringMatcher.new(@to_match, @to_reject, @regex_string)
     #@m_with_typo = StringMatcher.new(@to_match_with_typo, @regex_string)
-  end
-
-  def test_regex_printer
-    assert_equal "regex printed", @r.regex_printer
   end
 
   def test_match_words_method_passes_when_correct

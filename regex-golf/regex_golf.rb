@@ -1,9 +1,12 @@
 #!/usr/bin/env ruby
+# regex_golf.rb
 
 ## Ruby application to test regular expression before entering into Regex Golf
 ## See <regex.alf.nu>
 
 ## copy to /usr/local/bin so it's in $PATH?
+
+require_relative 'regex_golf_classes.rb'
 
 #words_to_match = String.new
 #words_to_reject = String.new
@@ -11,117 +14,10 @@
 #to_reject = words_to_reject.split
 #all_words = to_match + to_reject
 
-GETWORDS = <<-TEXT 
-Press ENTER after each word.
-Press ENTER twice in a row when you are finished.
-TEXT
-
-CHECKLIST = <<-TEXT
-Check this list. Are they any misspelled words?
-  Don't worry yet if the list is missing a word --
-    We'll get to that later.
-Are there any misspelled words? [Y/n] 
-TEXT
-
-class WordGetter
-
-  attr_accessor :to_match, :to_reject
-  
-  # def initialize
-  # end
-
-  def get_match_words
-    puts "Enter your list of words to match."
-    print GETWORDS
-    @to_match = gets("\n\n").chomp
-    print_word_list(@to_match, "match")
-    check_list_complete(@to_match)
-  end
-
-  def check_list_for_errors(words = to_match)
-    print CHECKLIST
-    complete = gets.chomp.downcase
-    while complete != "n"
-      puts "Type the misspelled words here:"
-      misspelled = gets("\n\n").chomp
-      misspelled.each do |m|
-        words = words.split.delete(m).join('\n') # May not update list if words doesn't point to correct list
-      end
-      check_list_for_errors(words) # May not update list if words doesn't point to correct list
-    end
-  
-  end
-
-
-  def get_reject_words
-    puts "Enter your list of words to reject."
-    print GETWORDS
-    @to_reject = gets("\n\n").chomp
-    print_word_list(@to_reject, "reject")
-    check_list_complete(@to_reject)
-  end
-
-  def print_word_list(words = @to_match, match_reject = "match")
-    puts "This is your list of words to #{match_reject}. Please check it:"
-    words.split.sort.each {|w| puts w}
-  end
-
-  def check_list_complete(words = to_match)
-    puts "Is the list complete? (Y for Yes, any other key for No)"
-    complete = gets.chomp.downcase
-    while complete != "y"
-      puts "Add the missing words here:"
-      @to_match += gets("\n\n").chomp
-      print_word_list(@to_match, "match")
-      puts "Is the list complete? (Y for Yes, N for No)"
-      complete = gets.chomp.downcase
-    end
-  end
-
-end
-
 w = WordGetter.new
 w.get_match_words
 w.get_reject_words
-
-class StringMatcher
-
-  attr_accessor :all_words
-
-  def initialize(to_match, to_reject, regex_string = String.new)
-    @to_match = to_match.split
-    @to_reject = to_reject.split
-    @all_words = @to_match + @to_reject
-    # @regex_string = regex_string
-    @regex = Regexp.new(regex_string)
-  end
-
-  def match_words?
-    @all_words.map do |word|
-      word.match(@regex).string unless word.match(@regex).nil?
-    end.compact == @to_match
-  end
-
-end
-
-## Change actions below into a script that asks for regex
-
-s = StringMatcher.new(w.to_match, w.to_reject, "a.+")
-puts s.match_words?
-
-class RegexPrinter
-
-  def initialize(regex_string)
-    @regex = Regexp.new(regex_string)
-  end
-
-  def regex_printer
-    "regex printed"
-  end
-
-  def remove_regex_delimiters # Regex Golf site requires delimiter removal
-    @regex.inspect[1...-1]
-  end
-
-end
-
+s = StringMatcher.new(w.to_match, w.to_reject)
+s.get_regex
+p = RegexPrinter.new(s.regex_string)
+puts p.remove_regex_delimiters
