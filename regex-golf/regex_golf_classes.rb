@@ -47,7 +47,7 @@ Press ENTER twice in a row when you are done.
 TEXT
 
 CHECKLIST = <<-TEXT
-This is your current list. Are any incorrect or misspelled words?
+This is your current list. Are any words incorrect or misspelled?
   Don't worry yet if the list is missing a word --
     We'll get to that later. 
 Are there any misspelled words? [Y/n] 
@@ -98,10 +98,11 @@ class WordGetter
   def confirm_match_words
     print "\n", CHECKWORDS
     @confirm = gets.chomp.downcase
+    print "\n"
     if @confirm == "n"
       get_match_from_html(url = @url)
     else
-      get_match_from_html(url = @url).each {|w| puts w }
+      get_match_from_html(url = @url).each_with_index {|w,i| puts "#{i+1}: #{w}" }
       print "This is your list of words to match. Please compare it to the web page\nAre they all correct?[Y/n]"
       correct = gets.chomp.downcase
       if correct =~ /n/
@@ -111,10 +112,11 @@ class WordGetter
   end
 
   def confirm_reject_words
+    print "\n"
     if @confirm == "n"
       get_reject_from_html(url = @url)
     else
-      get_reject_from_html(url = @url).each {|w| puts w }
+      get_reject_from_html(url = @url).each_with_index {|w,i| puts "#{i+1}: #{w}" }
       print "This is your list of words to reject. Please compare it to the web page\nAre they all correct?[Y/n]"
       correct = gets.chomp.downcase
       if correct =~ /n/
@@ -202,14 +204,20 @@ class StringMatcher
   end
 
   def get_regex
-    @regex_string = gets.chomp
-    @regex = Regexp.new(@regex_string)
-    match_words?
-    if match_words?
-      puts "Hooray! Now copy your regex and paste into the web site input field:"
+    begin
+      @regex_string = gets.chomp
+      @regex = Regexp.new(@regex_string)
+    rescue StandardError=>e
+      puts e
+      retry
     else
-      puts "That regular expression doesn't work.  Try another one."
-      get_regex
+      match_words?
+      if match_words?
+        puts "Hooray! Now copy your regex and paste into the web site input field:"
+      else
+        puts "That regular expression doesn't work.  Try another one."
+        get_regex
+      end
     end
   end
 
