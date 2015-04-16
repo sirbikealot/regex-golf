@@ -11,5 +11,8 @@
 
 **9 April 2015**
  - Added new directory regex-golf, a CLI tool that lets you try different regular expressions to match/reject word lists before your final solution into the [Regex Golf](https://regex.alf.nu) web site.
+
+**16 April 2015**
+ - Added feature to regex-golf to import word lists from the [Regex Golf](https://regex.alf.nu) web site.
  
 My solutions to codewars challenges are in the peer directory codewars_solutions.
