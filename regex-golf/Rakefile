@@ -2,11 +2,10 @@
 require 'rake/testtask'
  
 Rake::TestTask.new do |task|
-  task.libs << "./" # %w(test lib) # or << "test" bc lib is default
+  task.libs << "./" 
   task.test_files = FileList['./test*.rb']
-  # task.pattern = 'test/test_*.rb' # and/or task.test_files = FileList['test/test*.rb'] or FileList['./test*.rb']
-  task.warning = false # true 
+  task.warning = false 
   task.verbose = false # true prints load path to console
 end
  
-task :default => :test # can delete if not running rspec (spec) ?
+task :default => :test

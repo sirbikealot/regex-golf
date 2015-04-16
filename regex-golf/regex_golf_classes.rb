@@ -128,7 +128,6 @@ class WordGetter
   def check_match_list_for_errors
     print "\n", CHECKLIST
     spelled_correct = gets.chomp.downcase
-              # puts "@to_match = ", @to_match.inspect ## REMOVE ##
     if spelled_correct !~ /n/
       print GETWORDS
       misspelled = gets("\n\n").chomp.split
@@ -144,7 +143,6 @@ class WordGetter
   def check_reject_list_for_errors
     print "\n", CHECKLIST
     spelled_correct = gets.chomp.downcase
-              # puts "@to_match = ", @to_match.inspect ## REMOVE ##
     if spelled_correct !~ /n/
       print GETWORDS
       misspelled = gets("\n\n").chomp.split
@@ -182,7 +180,7 @@ class WordGetter
 
   def print_word_list(words = @to_match, match_reject = "match")
     puts "This is your list of words to #{match_reject}. Please check it:"
-    words.sort.each {|w| puts w} ## CHANGED 15Apr 10:51am removed #split bc @to_match is Array now
+    words.sort.each {|w| puts w}
   end
 
 end
@@ -197,10 +195,10 @@ class StringMatcher
     @to_match = to_match
     @to_reject = to_reject
     @all_words = @to_match + @to_reject
-    @regex_string = regex_string
-    @regex = Regexp.new(@regex_string) # default empty string for rake tests
+    @regex_string = regex_string # default empty string for tests
+    @regex = Regexp.new(@regex_string) 
     puts "Now try a regular expression."
-    puts "Don't prepend or append it with delimiters ('/')."
+    puts "Don't prepend or append it with any delimiters ('/')."
   end
 
   def get_regex
@@ -231,7 +229,7 @@ class RegexPrinter
     @regex = Regexp.new(regex_string)
   end
 
-  def remove_regex_delimiters # Regex Golf site requires delimiter removal
+  def remove_regex_delimiters # Regex Golf web site requires delimiter removal
     @regex.inspect[1...-1]
   end
 
