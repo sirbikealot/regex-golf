@@ -1,18 +1,13 @@
-## useful-ruby-utilities
+## password-gen
 
-###Some file utilities written in Ruby
+###An interactive tool for lovers of Regex Golf
 
- - ruby-ls (A ruby clone of POSIX ls command. Course assignment from [**elm-city-craftworks/**course-001](https://github.com/sirbikealot/course-001/blob/master/PART_1.md)
- - password_generator (Customizable password creator)
+ -Ever played [Regex Golf](https://regex.alf.nu)? You are presented two lists of words, and you have to create a regular expression (Regexp) that matches all the words on the left-hand list ('good' words) while rejecting all the words on the right-hand list ('bad' words).
 
-**24 March 2015**
- - Added user interface for password_generator.rb.  User can select password length and omit special characters.
- - Added executable version password_gen => Put it in your path and use it from the CLI anytime.
+ -You score points for every 'good' word your regular expression matches, but you lose points for every 'bad' word your regular expression matches.  Furthermore, you lose a point for every character in your regular expression, which qualifies the game as a sort of Code Golf), so if you want to conserve your points you have to open a REPL and type in all the words before you start hacking out different Regexps in your favorite coding language.  This console tool, written entirely in Ruby, lets you try different regular expressions to match/reject word lists before entering your final solution into the [Regex Golf](https://regex.alf.nu) web site.
 
-**9 April 2015**
- - Added new directory regex-golf, a CLI tool that lets you try different regular expressions to match/reject word lists before your final solution into the [Regex Golf](https://regex.alf.nu) web site.
+ -After you clone this repo, run `ruby regex_golf.rb` from the CLI and follow the instructions.
+
 
 **16 April 2015**
- - Added feature to regex-golf to import word lists from the [Regex Golf](https://regex.alf.nu) web site.
- 
-My solutions to codewars challenges are in the peer directory codewars_solutions.
+ - Added feature to regex-golf to import word lists from the [Regex Golf](https://regex.alf.nu) web site so you don't have to type any of them!
