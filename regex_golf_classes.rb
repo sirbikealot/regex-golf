@@ -2,10 +2,6 @@
 
 require_relative 'regex_golf_data.rb'
 
-require 'uri'
-require 'open-uri'
-require 'net/http'
-require 'openssl'
 require 'json'
 
 class WordGetter
@@ -27,13 +23,7 @@ class WordGetter
   #3) Retrieve text of entire web page
 
   def get_html_string(url = @url)
-    uri = URI.parse(URI.encode(url.strip))
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    request = Net::HTTP::Get.new(uri.request_uri)
-    response = http.request(request)
-    response.body
+    response = `curl #{url}`
   end
 
   # 4) Retrieve Match and Reject word lists from web page and create arrays for each
