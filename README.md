@@ -1,4 +1,4 @@
-## password-gen
+## regex-golf
 
 ###An interactive tool for lovers of Regex Golf
 
